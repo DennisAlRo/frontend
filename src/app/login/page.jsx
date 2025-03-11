@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation"; // Para redirigir al usuario
+import { useRouter } from "next/navigation";
 
 export default function Login() {
   const [name, setName] = useState("");
@@ -9,18 +9,31 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aquí haces una petición a tu backend para autenticar al usuario
-    const res = await fetch("/api/login", { // API backend para login
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name, password }),
-    });
-    if (res.ok) {
-      router.push("/"); // Redirigir al inicio si el login es exitoso
-    } else {
-      alert("Error al iniciar sesión");
+
+    try {
+      // Hacer la solicitud al backend
+      const res = await fetch("http://localhost:5000/auth/login", { // Cambia esta URL si es necesario
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, password }),
+      });
+
+      // Verificar si la respuesta es exitosa
+      const data = await res.json();
+      if (res.ok) {
+        // Si el login es exitoso, guardamos el token
+        localStorage.setItem("access_token", data.access_token);
+        alert("Login exitoso");
+        router.push("/"); // Redirigir a la página principal
+      } else {
+        // Si el login falla, mostramos el mensaje de error
+        alert("Error al iniciar sesión: " + (data.message || "Credenciales incorrectas"));
+      }
+    } catch (error) {
+      console.error("Error en la solicitud:", error);
+      alert("Hubo un error en la solicitud. Por favor, intenta nuevamente.");
     }
   };
 
