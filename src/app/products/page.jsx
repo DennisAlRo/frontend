@@ -1,9 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function ProductsPage() {
   const [products, setProducts] = useState([]);
   const [visibleProducts, setVisibleProducts] = useState([]);
+  const router = useRouter();
 
   useEffect(() => {
     async function loadProducts() {
@@ -33,6 +35,44 @@ export default function ProductsPage() {
     loadProducts();
   }, []);
 
+  const handleBuy = async (product) => {
+    // Obtener el ID del carrito desde el localStorage
+    const cartId = localStorage.getItem("cart_id");
+    if (!cartId) {
+      // Si no existe un carrito, redirigir al carrito para crearlo
+      router.push("/cart");
+      return;
+    }
+
+    // Enviar el producto al backend para guardarlo en la tabla cart_product
+    const token = localStorage.getItem("access_token");
+    try {
+      const res = await fetch("http://localhost:5000/cart/products", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          cartId,
+          productId: product.id,
+          quantity: 1, // La cantidad por defecto es 1
+        }),
+      });
+
+      if (res.ok) {
+        alert("Producto agregado al carrito");
+        router.push("/cart"); // Redirigir al carrito
+      } else {
+        const data = await res.json();
+        alert(data.message || "Error al agregar el producto al carrito");
+      }
+    } catch (error) {
+      console.error("Error al agregar el producto al carrito:", error);
+      alert("Hubo un error al agregar el producto al carrito.");
+    }
+  };
+
   return (
     <div className="products-page">
       <h1>Productos</h1>
@@ -47,7 +87,7 @@ export default function ProductsPage() {
               <h2>{product.nombreproducto}</h2>
               <p>{product.detalle}</p>
               <p className="price">${product.precio}</p>
-              <button>Comprar</button>
+              <button onClick={() => handleBuy(product)}>Comprar</button>
             </div>
           </div>
         ))}

@@ -1,14 +1,29 @@
 "use client";
 import { useEffect, useState } from "react";
-import { fetchCart } from "../services/api";
 
 export default function CartPage() {
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
     async function loadCart() {
-      const data = await fetchCart();
-      setCart(data);
+      const token = localStorage.getItem("access_token");
+
+      try {
+        const res = await fetch("http://localhost:5000/cart_product", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!res.ok) throw new Error("Error al cargar el carrito");
+
+        const data = await res.json();
+        setCart(data.cartProducts); // Asumiendo que la respuesta contiene los productos del carrito
+      } catch (error) {
+        console.error("Error al obtener el carrito:", error);
+      }
     }
     loadCart();
   }, []);
@@ -22,7 +37,12 @@ export default function CartPage() {
         ) : (
           <ul>
             {cart.map((item) => (
-              <li key={item.id}>{item.product.name} - {item.quantity}</li>
+              <li key={item.id} className="cart-item">
+                <img src={item.product.imagen} alt={item.product.nombreproducto} width="100" />
+                <span>{item.product.nombreproducto}</span>
+                <span>{item.quantity}</span>
+                <span>${item.product.precio}</span>
+              </li>
             ))}
           </ul>
         )}
