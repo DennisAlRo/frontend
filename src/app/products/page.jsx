@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 
 export default function ProductsPage() {
   const [products, setProducts] = useState([]);
-  const [visibleProducts, setVisibleProducts] = useState([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -16,18 +15,6 @@ export default function ProductsPage() {
         const data = await res.json();
         const sortedData = data.sort((a, b) => a.id - b.id); // Ordenar por ID ascendente
         setProducts(sortedData);
-
-        // Agregar productos uno por uno con retraso
-        sortedData.forEach((product, index) => {
-          setTimeout(() => {
-            setVisibleProducts((prev) => {
-              if (!prev.find((p) => p.id === product.id)) {
-                return [...prev, product];
-              }
-              return prev;
-            });
-          }, index * 500);
-        });
       } catch (error) {
         console.error("Error al cargar productos:", error);
       }
@@ -36,36 +23,84 @@ export default function ProductsPage() {
   }, []);
 
   const handleBuy = async (product) => {
-    // Obtener el ID del carrito desde el localStorage
-    const cartId = localStorage.getItem("cart_id");
-    if (!cartId) {
-      // Si no existe un carrito, redirigir al carrito para crearlo
-      router.push("/cart");
+    const token = localStorage.getItem("access_token");
+
+    if (!token) {
+      alert("Debes iniciar sesión para comprar productos");
+      router.push("/login");
       return;
     }
 
-    // Enviar el producto al backend para guardarlo en la tabla cart_product
-    const token = localStorage.getItem("access_token");
     try {
-      const res = await fetch("http://localhost:5000/cart/products", {
+      // Obtener el ID del usuario autenticado desde el backend
+      const userRes = await fetch("http://localhost:5000/auth/me", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const userData = await userRes.json();
+      if (!userRes.ok || !userData.id) {
+        alert("No se pudo obtener la información del usuario.");
+        return;
+      }
+
+      const userId = userData.id;
+
+      // Obtener o crear el carrito del usuario
+      const cartRes = await fetch(`http://localhost:5000/cart/user/${userId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      let cartData = await cartRes.json();
+
+      if (!cartRes.ok || !cartData.id) {
+        // Si el carrito no existe, crearlo
+        const createCartRes = await fetch("http://localhost:5000/cart", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ userId }),
+        });
+
+        cartData = await createCartRes.json();
+
+        if (!createCartRes.ok || !cartData.id) {
+          alert("Error al crear el carrito.");
+          return;
+        }
+      }
+
+      const cartId = cartData.id;
+      localStorage.setItem("cart_id", cartId); // Guardar el cartId en localStorage
+
+      // Cambiar la URL de la solicitud para que coincida con la nueva ruta del backend
+      const addToCartRes = await fetch(`http://localhost:5000/cart/${cartId}/add-product`, {  // Actualizar la ruta aquí
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          cartId,
           productId: product.id,
-          quantity: 1, // La cantidad por defecto es 1
+          quantity: 1, // Cantidad por defecto
         }),
       });
 
-      if (res.ok) {
+      if (addToCartRes.ok) {
         alert("Producto agregado al carrito");
-        router.push("/cart"); // Redirigir al carrito
+        router.push("/cart"); // Redirigir a la página del carrito
       } else {
-        const data = await res.json();
-        alert(data.message || "Error al agregar el producto al carrito");
+        const errorData = await addToCartRes.json();
+        alert(errorData.message || "Error al agregar el producto al carrito");
       }
     } catch (error) {
       console.error("Error al agregar el producto al carrito:", error);
@@ -77,12 +112,9 @@ export default function ProductsPage() {
     <div className="products-page">
       <h1>Productos</h1>
       <div className="products-container">
-        {visibleProducts.map((product, index) => (
-          <div key={`${product.id}-${index}`} className="product-card">
-            <img
-              src={product.imagen}
-              alt={product.nombreproducto}
-            />
+        {products.map((product) => (
+          <div key={product.id} className="product-card">
+            <img src={product.imagen} alt={product.nombreproducto} />
             <div className="product-card-content">
               <h2>{product.nombreproducto}</h2>
               <p>{product.detalle}</p>
