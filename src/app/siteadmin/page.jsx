@@ -1,6 +1,6 @@
-"use client";
+"use client";  // Marca este archivo como componente de cliente
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function AdminSite() {
@@ -11,9 +11,10 @@ export default function AdminSite() {
     precio: "",
     imagen: "",
   });
+  const [errorMessage, setErrorMessage] = useState(null); // Estado para mostrar el mensaje de error
   const router = useRouter();
 
-  // Verificar si el usuario está autenticado
+  // Verificar si el usuario está autenticado y si es el usuario con id 1
   useEffect(() => {
     const token = localStorage.getItem("access_token");
     if (!token) {
@@ -30,9 +31,12 @@ export default function AdminSite() {
       })
         .then((res) => res.json())
         .then((data) => {
-          if (!data.id) {
-            // Si el token no es válido, redirigir al login
-            router.push("/login");
+          if (!data.id || data.id !== 1) {
+            // Si el token no es válido o el usuario no es el admin (id 1)
+            setErrorMessage("No tienes permisos para acceder a esta página.");
+            setTimeout(() => {
+              router.push("/"); // Redirigir al inicio después de mostrar el mensaje
+            }, 3000); // Redirigir después de 3 segundos
           }
         })
         .catch(() => {
@@ -114,6 +118,11 @@ export default function AdminSite() {
 
   return (
     <div className="admin-site-container">
+      {errorMessage && (
+        <div className="error-message">
+          <p>{errorMessage}</p>
+        </div>
+      )}
       <h1 className="admin-site-title">Admin Dashboard</h1>
       <p>Bienvenido al panel de administración. Aquí podrás gestionar todos los aspectos de la tienda online.</p>
 
