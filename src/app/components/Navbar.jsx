@@ -12,6 +12,7 @@ export default function Navbar() {
           <Link href="/products" className="navbar-link">Productos</Link>
           <Link href="/cart" className="navbar-link">Carrito</Link>
           <Link href="/aboutus" className="navbar-link">About Us</Link> {/* Nueva ruta */}
+          <Link href="/siteadmin" className="navbar-link">Admin Site</Link> {/* Nueva ruta */}
         </div>
       </div>
 

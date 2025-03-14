@@ -3,6 +3,7 @@
 /* Estilo general para la barra de navegación */
 .navbar {
   display: flex;
+  flex-wrap: wrap; /* Permite que los elementos se ajusten a pantallas más pequeñas */
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
@@ -17,18 +18,25 @@
 .navbar-left {
   display: flex;
   align-items: center;
+  flex-wrap: wrap; /* Permite que el título y enlaces se ajusten */
+  gap: 1rem; /* Espaciado entre elementos */
+  flex: 1;
 }
 
 .navbar-title {
-  font-size: 2rem;
+  font-size: 1.5rem; /* Reducir el tamaño para pantallas más pequeñas */
   font-weight: bold;
-  margin-right: 2rem;
+  margin-right: 1.5rem;
+  flex: 1;
 }
 
 /* Estilo de los enlaces en la barra de navegación */
 .navbar-links {
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
+  flex-wrap: wrap; /* Los enlaces se ajustarán en pantallas más pequeñas */
+  margin: 0;
+  padding: 0;
 }
 
 .navbar-link {
@@ -39,7 +47,7 @@
   color: white;
   font-weight: 500;
   text-align: center;
-  width: 150px;
+  width: 120px; /* Ajusta el tamaño del botón */
   transition: all 0.3s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -53,7 +61,8 @@
 /* Bloque de botones de Login y Register */
 .navbar-auth-buttons {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
+  flex-wrap: wrap; /* Asegura que los botones no se salgan en pantallas pequeñas */
 }
 
 .navbar-login-button,
@@ -87,6 +96,47 @@
 .navbar-register-button:hover {
   background-color: #e2e8f0; /* Gris claro */
   transform: translateY(-2px);
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column; /* Los elementos se apilan en pantallas pequeñas */
+    align-items: flex-start;
+  }
+
+  .navbar-left {
+    justify-content: flex-start;
+    margin-bottom: 1rem;
+  }
+
+  .navbar-title {
+    font-size: 1.25rem; /* Ajustar tamaño del título en pantallas pequeñas */
+  }
+
+  .navbar-links {
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%; /* Asegura que los enlaces ocupen todo el ancho disponible */
+    align-items: center; /* Centra los enlaces */
+  }
+
+  .navbar-link {
+    width: auto; /* El tamaño de los botones se ajusta a su contenido */
+    text-align: center;
+  }
+
+  .navbar-auth-buttons {
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    align-items: center; /* Centra los botones */
+  }
+
+  .navbar-login-button,
+  .navbar-register-button {
+    width: auto; /* Ajusta el ancho de los botones */
+  }
 }
 
 /* Estilos para las páginas de Login y Registro */
@@ -514,4 +564,137 @@
   .cart-item-total button:hover {
     color: #c53030;
   }
+}
+
+/* Estilos para el contenedor principal del panel de administración */
+.admin-site-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.admin-site-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.admin-site-container p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 40px;
+}
+
+/* Estilos para el formulario de añadir producto */
+form {
+  margin-bottom: 40px;
+}
+
+form table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+form table th,
+form table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+form table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  color: #333;
+}
+
+form input[type="text"],
+form input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+form input[type="text"]:focus,
+form input[type="number"]:focus {
+  outline: none;
+  border-color: #007BFF;
+}
+
+button[type="submit"] {
+  background-color: #007BFF;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* Estilos para la tabla de productos existentes */
+.products-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.product-card {
+  background-color: #fff;
+  width: 200px;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  overflow: hidden;
+}
+
+.product-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.product-card-content h2 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.product-card-content p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.product-card-content .price {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #28a745;
+  margin-bottom: 15px;
+}
+
+.product-card button {
+  background-color: #dc3545;
+  color: #fff;
+  padding: 8px 16px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.product-card button:hover {
+  background-color: #c82333;
 }
