@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@400;500&display=swap');
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: linear-gradient(135deg, #f7f7f7, #eaeaea);
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* Contenedor que abarca toda la vista */
+.register-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 40px;
+}
+
+/* Caja principal del formulario */
+.form-content {
+  background-color: #fff;
+  width: 100%;
+  max-width: 800px;
+  padding: 60px;
+  border-radius: 16px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  margin: 20%;
+}
+
+/* Título principal */
+.form-title {
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  font-size: 8rem;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+}
+
+/* Grupo de inputs */
+.input-group {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+/* Etiquetas de los inputs con letra aumentada */
+.input-group label {
+  font-family: 'Roboto', sans-serif;
+  display: block;
+  font-size: 24px; /* Tamaño de letra aumentado */
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 12px;
+}
+
+/* Campos de entrada */
+.input-field {
+  width: 95%;
+  padding: 18px 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 20px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-field:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+  outline: none;
+}
+
+/* Botón de envío centrado */
+.submit-btn {
+  font-family: 'Roboto', sans-serif;
+  width: 300px;
+  padding: 20px;
+  background: linear-gradient(90deg, #007bff, #0056b3);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 22px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  margin: 20px auto;
+}
+
+.submit-btn:hover {
+  background: linear-gradient(90deg, #0056b3, #004085);
+  transform: scale(1.05);
+}
+
+.submit-btn:active {
+  background: linear-gradient(90deg, #004085, #002752);
+  transform: scale(0.98);
+}
+
+/* Mensaje de error */
+.error {
+  font-size: 18px;
+  color: red;
+  margin-bottom: 20px;
+  text-align: center;
+}

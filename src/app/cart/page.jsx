@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import "./cart.css";
 
 export default function CartPage() {
   const [cart, setCart] = useState([]);
@@ -59,39 +60,45 @@ export default function CartPage() {
 
   return (
     <div className="cart-page">
-      <main className="cart-container">
-        <h1 className="cart-title">Carrito de Compras</h1>
+  <main className="cart-container">
+    <h1 className="cart-title">Carrito de Compras</h1>
 
-        {cart.length === 0 ? (
-          <p className="cart-empty">Tu carrito está vacío.</p>
-        ) : (
-          <div>
-            <div className="cart-items">
-              {cart.map((item) => (
-                <div key={item.id} className="cart-item">
-                  <img src={item.product.imagen} alt={item.product.nombreproducto} className="cart-item-img" />
-                  <div className="cart-item-details">
-                    <h3>{item.product.nombreproducto}</h3>
-                    <p>Cantidad: {item.cantidad}</p>
-                    <p>Precio unitario: ${item.product.precio}</p>
-                  </div>
-                  <div className="cart-item-total">
-                    <p>${item.product.precio * item.cantidad}</p>
-                    <button onClick={() => handleRemoveItem(item.product.id)} className="cart-remove-btn">
-                      Eliminar
-                    </button>
-                  </div>
-                </div>
-              ))}
+    {cart.length === 0 ? (
+      <p className="cart-empty">Tu carrito está vacío.</p>
+    ) : (
+      <div className="cart-content">
+        <div className="cart-items">
+          {cart.map((item) => (
+            <div key={item.id} className="cart-item">
+              <img
+                src={item.product.imagen}
+                alt={item.product.nombreproducto}
+                className="cart-item-img"
+              />
+              <div className="cart-item-details">
+                <h3>{item.product.nombreproducto}</h3>
+                <p>Cantidad: {item.cantidad}</p>
+                <p>Precio unitario: ${item.product.precio}</p>
+              </div>
+              <div className="cart-item-total">
+                <button
+                  onClick={() => handleRemoveItem(item.product.id)}
+                  className="cart-remove-btn"
+                >
+                  Eliminar
+                </button>
+              </div>
             </div>
+          ))}
+        </div>
 
-            <div className="cart-summary">
-              <h2>Total: ${total}</h2>
-              <button className="checkout-btn">Proceder a la compra</button>
-            </div>
-          </div>
-        )}
-      </main>
-    </div>
+        <div className="cart-summary">
+          <h2>Total: ${total}</h2>
+          <button className="checkout-btn">Proceder a la compra</button>
+        </div>
+      </div>
+    )}
+  </main>
+</div>
   );
 }

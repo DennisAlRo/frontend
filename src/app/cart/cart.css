@@ -1,0 +1,174 @@
+/* Estilos para la página del carrito de compras */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap');
+
+.cart-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    background-color: #f7fafc; /* Fondo claro */
+    min-height: 100vh;
+    width: 100%;
+    font-family: 'Open Sans', sans-serif;
+  }
+  
+  .cart-container {
+    width: 100%;
+    max-width: 1200px;
+  }
+  
+  .cart-title {
+    font-size: 7rem;
+    font-weight: bold;
+    color: #90b8ff;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .cart-empty {
+    font-size: 2rem; /* Ajusta este valor según lo que necesites */
+    font-weight: bond;
+  }
+  
+  
+  /* Nueva clase para centrar el contenido */
+  .cart-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .cart-items {
+    width: 100%;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    font-family: 'Open Sans', sans-serif;
+  }
+  
+  .cart-item {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  .cart-item-img {
+    width: 20%;
+    height: 20%;
+    object-fit: cover;
+    margin-right: 1.5rem;
+    border-radius: 20px;
+  }
+  
+  .cart-item-details {
+    margin-right: 300px;
+  }
+
+  .cart-item-details {
+    flex: 1;
+  }
+
+  .cart-item-details h3 {
+    font-size: 2rem;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .cart-item-details p {
+    font-size: 1.6rem;
+    color: #b5c0d2;
+  }
+  
+  .cart-item-total {
+    text-align: right;
+  }
+  
+  
+  .cart-item-total button {
+    height: 60px;
+    width: 160px;
+    color: #e53e3e;
+    font-weight: bold;
+    background: white;
+    font-size: 1.8rem;
+    border-color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border: none;
+
+  }
+  
+  .cart-item-total button:hover {
+    color: white;
+    background-color: red;
+    border-color: red;
+  }
+  
+  /* Ajustes para el resumen centrándolo */
+  .cart-summary {
+    width: 90%;
+    max-width: 500px;
+    padding: 1rem;
+    margin: 2rem auto; /* Centrado horizontalmente */
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Contenido centrado */
+    font-family: 'Open Sans', sans-serif;
+  }
+  
+  .cart-summary h2 {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #2d3748;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .cart-summary button:hover {
+    color: red;
+    background-color: white;
+    border-color: white;
+  }
+  
+  .checkout-btn {
+    color: white;
+    padding: 1.50rem 6rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 1.5rem;
+  }
+  
+  /* Modo oscuro */
+  @media (prefers-color-scheme: dark) {
+    .cart-page {
+      background-color: white;
+    }
+  
+    .cart-items,
+    .cart-summary {
+      background-color: #2d3748;
+      color: #e2e8f0;
+    }
+  
+    .cart-item-details h3,
+    .cart-summary h2 {
+      color: #e2e8f0;
+    }
+  
+    .checkout-btn {
+      background-color: red;
+      font-size: 1.5rem;
+    }
+      
+  }
+  

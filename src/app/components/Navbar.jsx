@@ -6,13 +6,26 @@ export default function Navbar() {
     <nav className="navbar">
       {/* Bloque izquierdo: Nombre de la tienda y enlaces */}
       <div className="navbar-left">
-        <h1 className="navbar-title">Tienda Online</h1>
+        {/* El título se convierte en enlace a la página principal */}
+        <Link href="/" className="navbar-title">
+          Tienda Online
+        </Link>
         <div className="navbar-links">
-          <Link href="/" className="navbar-link">Inicio</Link>
-          <Link href="/products" className="navbar-link">Productos</Link>
-          <Link href="/cart" className="navbar-link">Carrito</Link>
-          <Link href="/aboutus" className="navbar-link">About Us</Link> {/* Nueva ruta */}
-          <Link href="/siteadmin" className="navbar-link">Admin Site</Link> {/* Nueva ruta */}
+          <Link href="/" className="navbar-link">
+            Inicio
+          </Link>
+          <Link href="/products" className="navbar-link">
+            Productos
+          </Link>
+          <Link href="/cart" className="navbar-link">
+            Carrito
+          </Link>
+          <Link href="/aboutus" className="navbar-link">
+            About Us
+          </Link>
+          <Link href="/siteadmin" className="navbar-link">
+            Admin Site
+          </Link>
         </div>
       </div>
 

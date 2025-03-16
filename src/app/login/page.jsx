@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import "./login.css";
+
 
 export default function Login() {
   const [name, setName] = useState("");
@@ -96,36 +98,49 @@ export default function Login() {
   };
 
   return (
-    <div className="container">
+    <div className="register1-form">
       {isAuthenticated ? (
-        <p>Ya estás logueado, redirigiendo...</p>  // Mostrar mensaje si el usuario está logueado
+        <p>Ya estás logueado, redirigiendo...</p>
       ) : (
-        <div className="login-form-container">
-          <h2 className="form-title">Iniciar sesión</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="input-group">
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            width: '100%',
+          }}
+        >
+          <h2 className="form1-title">Iniciar sesión</h2>
+          <form onSubmit={handleSubmit} style={{ width: '100%' }}>
+            <div className="input1-group">
               <label htmlFor="name">Nombre</label>
               <input
                 type="text"
                 id="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="input-field"
+                className="input1-field"
+                placeholder="Ingresa tu nombre"
                 required
               />
             </div>
-            <div className="input-group">
+            <div className="input1-group">
               <label htmlFor="password">Contraseña</label>
               <input
                 type="password"
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="input-field"
+                className="input1-field"
+                placeholder="Ingresa tu contraseña"
                 required
               />
             </div>
-            <button type="submit" className="submit-btn">Iniciar sesión</button>
+            <div style={{ textAlign: 'center' }}>
+              <button type="submit" className="submit1-btn">
+                Iniciar sesión
+              </button>
+            </div>
           </form>
         </div>
       )}

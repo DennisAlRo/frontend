@@ -1,0 +1,75 @@
+/* Contenedor principal del slider */
+.sliderContainer {
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+/* Estilos para cada slide */
+
+
+/* Estilos para el Link del producto */
+.productLink {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+/* Contenedor del contenido del producto */
+.productContainer {
+  /* (opcional: agregar más estilos si se requiere) */
+}
+
+/* Contenedor fijo para la imagen */
+.imageContainer {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Estilo para la imagen del producto */
+.productImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Usa "cover" si prefieres recortar la imagen */
+  display: block;
+}
+
+/* Overlay semitransparente sobre la imagen */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+/* Información del producto (nombre y descripción) */
+.productInfo {
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* Nombre del producto */
+.productName {
+  font-size: 1.25rem;
+  font-weight: bold;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+/* Flecha de siguiente personalizada */
+.nextArrow {
+  display: block !important;
+  z-index: 1000 !important;
+  right: 10px !important;
+}
+
+/* Flecha de anterior personalizada */
+.prevArrow {
+  display: block !important;
+  z-index: 1000 !important;
+  left: 10px !important;
+}

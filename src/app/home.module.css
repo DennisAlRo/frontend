@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto:wght@400;700&display=swap');
+
+.container {
+  /* Fondo degradado que da un toque moderno */
+  background: linear-gradient(135deg, #F6D365 0%, #FDA085 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* Ocupa la altura completa de la ventana */
+  padding: 20px;
+}
+
+.main {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%;
+}
+
+.title {
+  font-size: 2.2rem;  /* Tamaño de fuente mayor */
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  color: #2D3436;
+  margin-bottom: 20px;
+}
+
+.description {
+  font-size: 1.25rem;
+  font-family: 'Roboto', sans-serif;
+  margin-bottom: 30px;
+  color: #636E72;
+}

@@ -1,0 +1,55 @@
+/* aboutus.css */
+
+/* Contenedor principal */
+.about-us-container {
+    display: flex;
+    flex-direction: column;       /* Organiza los elementos en columna */
+    align-items: center;          /* Centra horizontalmente */
+    justify-content: center;      /* Centra verticalmente */
+    min-height: 100vh;
+    padding: 2rem;
+    margin: 0;
+    background-color: #f2f5f7;
+  }
+  
+  /* Título principal */
+  .about-us-title {
+    font-size: 4rem;              /* Tamaño de letra aumentado para destacar */
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  /* Contenedor del contenido textual */
+  .about-us-content {
+    width: 100%;
+    max-width: 800px;
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  /* Estilo para los párrafos de contenido */
+  .about-us-text {
+    font-size: 1.8rem;           /* Mayor tamaño de fuente para mejor legibilidad */
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 2rem;
+  }
+  
+  /* Estilo para resaltar el nombre o parte importante del texto */
+  .about-us-text strong {
+    font-weight: bold;
+    color: #2d3748;
+  }
+  
+  /* Responsividad: Ajustes para dispositivos móviles */
+  @media (max-width: 768px) {
+    .about-us-title {
+      font-size: 3rem;
+    }
+    .about-us-text {
+      font-size: 1.6rem;
+    }
+  }
+  

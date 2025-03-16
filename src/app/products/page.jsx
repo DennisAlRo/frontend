@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import "./products.css";
 
 export default function ProductsPage() {
   const [products, setProducts] = useState([]);
@@ -113,17 +115,33 @@ export default function ProductsPage() {
       <h1>Productos</h1>
       <div className="products-container">
         {products.map((product) => (
-          <div key={product.id} className="product-card">
-            <img src={product.imagen} alt={product.nombreproducto} />
-            <div className="product-card-content">
-              <h2>{product.nombreproducto}</h2>
-              <p>{product.detalle}</p>
-              <p className="price">${product.precio}</p>
-              <button onClick={() => handleBuy(product)}>Comprar</button>
+          <Link
+            key={product.id}
+            href={`/products/${product.id}`}
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <div className="product-card">
+              <img src={product.imagen} alt={product.nombreproducto} />
+              <div className="product-card-content">
+                <h2>{product.nombreproducto}</h2>
+                <p>{product.detalle}</p>
+                <p className="price">${product.precio}</p>
+                <button
+                  onClick={(e) => {
+                    // Prevenir la navegación del Link
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleBuy(product);
+                  }}
+                >
+                  Comprar
+                </button>
+              </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
   );
+  
 }

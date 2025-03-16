@@ -1,0 +1,142 @@
+/* Contenedor principal del panel de administración */
+.adminSiteContainer {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Título del admin */
+.adminSiteTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Párrafos dentro del contenedor de admin */
+.adminSiteContainer p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 40px;
+}
+
+/* Formulario para añadir producto */
+.addProductForm {
+  margin-bottom: 40px;
+}
+
+/* Estilos para la tabla del formulario */
+.addProductForm table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.addProductForm table th,
+.addProductForm table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.addProductForm table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Inputs del formulario */
+.addProductForm input[type="text"],
+.addProductForm input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.addProductForm input[type="text"]:focus,
+.addProductForm input[type="number"]:focus {
+  outline: none;
+  border-color: #007BFF;
+}
+
+/* Botón de envío del formulario */
+.addProductForm button[type="submit"] {
+  background-color: #007BFF;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.addProductForm button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* Contenedor de productos existentes */
+.productsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Tarjeta de producto */
+.productCard {
+  background-color: #fff;
+  width: 200px;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Imagen de la tarjeta */
+.productCard img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+/* Contenido interno de la tarjeta */
+.productCardContent h2 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.productCardContent p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+/* Precio del producto */
+.price {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #28a745;
+  margin-bottom: 15px;
+}
+
+/* Botón de eliminación de producto */
+.productCard button {
+  background-color: #dc3545;
+  color: #fff;
+  padding: 8px 16px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.productCard button:hover {
+  background-color: #c82333;
+}

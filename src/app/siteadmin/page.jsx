@@ -1,7 +1,9 @@
-"use client";  // Marca este archivo como componente de cliente
+"use client"; // Marca este archivo como componente de cliente
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import styles from "./administracion.module.css";
+
 
 export default function AdminSite() {
   const [products, setProducts] = useState([]);
@@ -14,7 +16,7 @@ export default function AdminSite() {
   const [errorMessage, setErrorMessage] = useState(null); // Estado para mostrar el mensaje de error
   const router = useRouter();
 
-  // Verificar si el usuario está autenticado y si es el usuario con id 1
+  // Verificar si el usuario está autenticado (cualquier usuario válido)
   useEffect(() => {
     const token = localStorage.getItem("access_token");
     if (!token) {
@@ -31,21 +33,21 @@ export default function AdminSite() {
       })
         .then((res) => res.json())
         .then((data) => {
-          if (!data.id || data.id !== 1) {
-            // Si el token no es válido o el usuario no es el admin (id 1)
-            setErrorMessage("No tienes permisos para acceder a esta página.");
+          // Se permite el acceso a cualquier usuario que tenga un id válido de usuario
+          if (!data.id) {
+            setErrorMessage("No estás autenticado para acceder a esta página.");
             setTimeout(() => {
-              router.push("/"); // Redirigir al inicio después de mostrar el mensaje
-            }, 3000); // Redirigir después de 3 segundos
+              router.push("/login");
+            }, 3000);
           }
         })
         .catch(() => {
-          // Si ocurre un error en la verificación, redirigir al login
           router.push("/login");
         });
     }
   }, [router]);
 
+  // Cargar productos existentes
   useEffect(() => {
     async function loadProducts() {
       try {
@@ -109,7 +111,9 @@ export default function AdminSite() {
           throw new Error("Error al eliminar el producto");
         }
 
-        setProducts((prevProducts) => prevProducts.filter((product) => product.id !== productId));
+        setProducts((prevProducts) =>
+          prevProducts.filter((product) => product.id !== productId)
+        );
       } catch (error) {
         console.error("Error al eliminar producto:", error);
       }
@@ -117,18 +121,21 @@ export default function AdminSite() {
   };
 
   return (
-    <div className="admin-site-container">
+    <div className={styles.adminSiteContainer}>
       {errorMessage && (
-        <div className="error-message">
+        <div className={styles.errorMessage}>
           <p>{errorMessage}</p>
         </div>
       )}
-      <h1 className="admin-site-title">Admin Dashboard</h1>
-      <p>Bienvenido al panel de administración. Aquí podrás gestionar todos los aspectos de la tienda online.</p>
+      <h1 className={styles.adminSiteTitle}>Admin Dashboard</h1>
+      <p>
+        Bienvenido al panel de administración. Aquí podrás gestionar todos los
+        aspectos de la tienda online.
+      </p>
 
       {/* Formulario de añadir producto */}
       <h2>Añadir Producto</h2>
-      <form onSubmit={handleAddProduct}>
+      <form className={styles.addProductForm} onSubmit={handleAddProduct}>
         <table>
           <thead>
             <tr>
@@ -192,15 +199,17 @@ export default function AdminSite() {
 
       {/* Tabla de productos existentes */}
       <h2>Productos Existentes</h2>
-      <div className="products-container">
+      <div className={styles.productsContainer}>
         {products.map((product) => (
-          <div key={product.id} className="product-card">
+          <div key={product.id} className={styles.productCard}>
             <img src={product.imagen} alt={product.nombreproducto} />
-            <div className="product-card-content">
+            <div className={styles.productCardContent}>
               <h2>{product.nombreproducto}</h2>
               <p>{product.detalle}</p>
-              <p className="price">${product.precio}</p>
-              <button onClick={() => handleDeleteProduct(product.id)}>Eliminar</button>
+              <p className={styles.price}>${product.precio}</p>
+              <button onClick={() => handleDeleteProduct(product.id)}>
+                Eliminar
+              </button>
             </div>
           </div>
         ))}

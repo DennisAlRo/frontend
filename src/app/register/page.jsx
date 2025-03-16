@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import "./register.css";
 
 export default function Register() {
   const [name, setName] = useState("");
@@ -34,10 +35,10 @@ export default function Register() {
   };
 
   return (
-    <div className="container">
-      <div className="register-form-container">
+    <div className="register-form">
+      <div className="form-content">
         <h2 className="form-title">Registrarse</h2>
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && <p className="error">{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <label htmlFor="name">Nombre</label>
@@ -47,6 +48,7 @@ export default function Register() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="input-field"
+              placeholder="Ingresa tu nombre"
               required
             />
           </div>
@@ -58,10 +60,15 @@ export default function Register() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="input-field"
+              placeholder="Ingresa tu contraseña"
               required
             />
           </div>
-          <button type="submit" className="submit-btn">Registrar</button>
+          <div style={{ textAlign: 'center' }}>
+            <button type="submit" className="submit-btn">
+              Registrar
+            </button>
+          </div>
         </form>
       </div>
     </div>
